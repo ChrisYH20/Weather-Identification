@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气图片识别</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>天气图片识别</h1>
+        <p>上传一张天气图片，系统将识别天气类型</p>
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">上传并识别</button>
+        </form>
+
+        {% if image_path %}
+        <div class="result">
+            <h2>识别结果</h2>
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='uploads/' + image_path.split('/')[-1]) }}" alt="上传的图片">
+            </div>
+            <div class="prediction">
+                <p>预测天气类型: <strong>{{ prediction }}</strong></p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
